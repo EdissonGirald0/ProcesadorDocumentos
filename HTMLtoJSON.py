@@ -54,3 +54,5 @@ exportar_a_csv(json_output_file, csv_output_file)
 
 # 2. Insertar en MongoDB (asegúrate de tener MongoDB ejecutándose localmente)
 # insertar_en_mongodb(json_output_file, mongodb_collection_name)
+
+

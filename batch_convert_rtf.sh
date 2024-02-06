@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Ruta al directorio que contiene los archivos .rtf y .doc
+# Ruta al directorio que contiene los archivos .rtf, .doc y Pdf.
 input_directory="/home/dev1/Documents/documentosAltasCortes/corte_suprema/"
 
 # Ruta al directorio donde se guardarán los archivos DOCX temporales
@@ -18,6 +18,21 @@ mkdir -p "$output_directory"
 
 # Inicializa el archivo de registro
 echo "Archivos procesados correctamente:" > "$log_file"
+
+# Convierte todos los archivos .pdf a .html en el directorio de entrada
+for file in "$input_directory"/*.pdf; do
+    if [ -f "$file" ]; then
+        # Utiliza pdftohtml para convertir el archivo .pdf a .html
+        pdftohtml -s -i "$file" "$output_directory/$(basename "$file" .pdf).html"
+        
+        # Verifica si la conversión fue exitosa
+        if [ $? -eq 0 ]; then
+            echo "$file" >> "$log_file"
+        else
+            echo "Error al procesar $file (pdftohtml)" >> "$log_file"
+        fi
+    fi
+done
 
 # Convierte todos los archivos .doc a .docx en el directorio de entrada
 for file in "$input_directory"/*.doc; do
