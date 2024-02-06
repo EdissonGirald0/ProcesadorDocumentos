@@ -1,6 +1,5 @@
 import json
 import os
-
 # Ruta de la carpeta que contiene los archivos JSON
 carpeta_json_entrada = '/home/dev1/AndroidStudioProjects/procesarDocument/CC_Autos_Div'
 
