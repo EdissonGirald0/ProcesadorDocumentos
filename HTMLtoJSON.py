@@ -40,9 +40,9 @@ def insertar_en_mongodb(json_file, collection_name):
     print(f"Datos insertados en MongoDB en la colección '{collection_name}'")
 
 # Rutas de archivos y carpetas
-carpeta_textos_limpios = '/home/dev1/AndroidStudioProjects/procesarDocument/corteConsHTMLlimpio/autos/'
-json_output_file = '/home/dev1/AndroidStudioProjects/procesarDocument/CC_Sentencias.json'
-csv_output_file = '/home/dev1/AndroidStudioProjects/procesarDocument/CC_Sentencias.csv'
+carpeta_textos_limpios = '/home/dev1/AndroidStudioProjects/procesarDocument/ResultadosCJ/Limpios'
+json_output_file = '/home/dev1/AndroidStudioProjects/procesarDocument/ResultadosCJ/Jsons/CJ_todos.json'
+csv_output_file = '/home/dev1/AndroidStudioProjects/procesarDocument/ResultadosCJ/Jsons/CJ_Todas.csv'
 mongodb_collection_name = 'nombre_de_tu_coleccion_en_mongodb'
 
 # Convertir a JSON

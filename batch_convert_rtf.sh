@@ -1,16 +1,16 @@
 #!/bin/bash
 
 # Ruta al directorio que contiene los archivos .rtf, .doc y Pdf.
-input_directory="/home/dev1/Documents/documentosAltasCortes/corte_suprema/"
+input_directory="/home/dev1/Documents/documentosAltasCortes/consejo_judicatura/"
 
 # Ruta al directorio donde se guardarán los archivos DOCX temporales
 temp_output_directory="/home/dev1/AndroidStudioProjects/procesarDocument/TempDOCX/"
 
 # Ruta al directorio donde se guardarán los archivos HTML
-output_directory="/home/dev1/AndroidStudioProjects/procesarDocument/ResultadosCSJ/ProcesadoSentencias/"
+output_directory="/home/dev1/AndroidStudioProjects/procesarDocument/ResultadosCJ/Procesados/"
 
 # Ruta al archivo de registro
-log_file="/home/dev1/AndroidStudioProjects/procesarDocument/registroSentenciasCSJ.txt"
+log_file="/home/dev1/AndroidStudioProjects/procesarDocument/registroSentenciasCJ.txt"
 
 # Asegúrate de que los directorios de salida existan
 mkdir -p "$temp_output_directory"

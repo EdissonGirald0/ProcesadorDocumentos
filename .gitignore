@@ -133,7 +133,7 @@ env.bak/
 venv.bak/
 ResultadosCC/
 ResultadosCS/
-ResultadosCSJ/
+ResultadosCJ/
 # Spyder project settings
 .spyderproject
 .spyproject

@@ -68,8 +68,8 @@ def procesar_archivos_html(carpeta_entrada, carpeta_salida):
     print("Proceso completado.")
 
 # Rutas de las carpetas de entrada y salida
-carpeta_html_entrada = '/home/dev1/AndroidStudioProjects/procesarDocument/procesadoSentencias/'
-carpeta_textos_limpios_salida = '/home/dev1/AndroidStudioProjects/procesarDocument/corteConsHTMLlimpio/sentencias/'
+carpeta_html_entrada = '/home/dev1/AndroidStudioProjects/procesarDocument/ResultadosCJ/Procesados'
+carpeta_textos_limpios_salida = '/home/dev1/AndroidStudioProjects/procesarDocument/ResultadosCJ/Limpios'
 
 # Procesar archivos HTML
 procesar_archivos_html(carpeta_html_entrada, carpeta_textos_limpios_salida)
