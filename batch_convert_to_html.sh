@@ -1,5 +1,84 @@
 #!/bin/bash
 
+###############################################################################
+# Script para convertir archivos .pdf, .doc y .rtf a .html en lote.
+# Autor: Edisson Giraldo        
+# Fecha: 24/06/24
+# Descripción:
+#   Convierte archivos PDF a HTML usando pdftohtml,
+#   archivos DOC a DOCX con LibreOffice y luego a HTML con Pandoc,
+#   y archivos RTF a HTML con Pandoc.
+#   Registra el resultado de cada conversión.
+###############################################################################
+
+# Configuración de rutas
+INPUT_DIR="/home/dev1/Documents/documentosAltasCortes/consejo_judicatura/"
+TEMP_DOCX_DIR="/home/dev1/AndroidStudioProjects/procesarDocument/TempDOCX/"
+OUTPUT_DIR="/home/dev1/AndroidStudioProjects/procesarDocument/ResultadosCJ/Procesados/"
+LOG_FILE="/home/dev1/AndroidStudioProjects/procesarDocument/registroSentenciasCJ.txt"
+
+# Crear directorios de salida si no existen
+mkdir -p "$TEMP_DOCX_DIR"
+mkdir -p "$OUTPUT_DIR"
+
+# Inicializar archivo de registro
+echo "Archivos procesados correctamente:" > "$LOG_FILE"
+
+# Función para convertir PDF a HTML
+convert_pdf() {
+    for file in "$INPUT_DIR"/*.pdf; do
+        [ -f "$file" ] || continue
+        pdftohtml -s -i "$file" "$OUTPUT_DIR/$(basename "$file" .pdf).html"
+        if [ $? -eq 0 ]; then
+            echo "$file" >> "$LOG_FILE"
+        else
+            echo "Error al procesar $file (pdftohtml)" >> "$LOG_FILE"
+        fi
+    done
+}
+
+# Función para convertir DOC a DOCX y luego a HTML
+convert_doc() {
+    for file in "$INPUT_DIR"/*.doc; do
+        [ -f "$file" ] || continue
+        libreoffice --headless --convert-to docx --outdir "$TEMP_DOCX_DIR" "$file"
+        if [ $? -eq 0 ]; then
+            DOCX_FILE="$TEMP_DOCX_DIR/$(basename "$file" .doc).docx"
+            pandoc "$DOCX_FILE" -o "$OUTPUT_DIR/$(basename "$file" .doc).html"
+            if [ $? -eq 0 ]; then
+                echo "$file" >> "$LOG_FILE"
+            else
+                echo "Error al procesar $file (pandoc)" >> "$LOG_FILE"
+            fi
+        else
+            echo "Error al procesar $file (libreoffice)" >> "$LOG_FILE"
+        fi
+    done
+}
+
+# Función para convertir RTF a HTML
+convert_rtf() {
+    for file in "$INPUT_DIR"/*.rtf; do
+        [ -f "$file" ] || continue
+        pandoc "$file" -o "$OUTPUT_DIR/$(basename "$file" .rtf).html"
+        if [ $? -eq 0 ]; then
+            echo "$file" >> "$LOG_FILE"
+        else
+            echo "Error al procesar $file (pandoc)" >> "$LOG_FILE"
+        fi
+    done
+}
+
+# Ejecutar conversiones
+convert_pdf
+convert_doc
+convert_rtf
+
+# Limpiar archivos temporales DOCX
+rm -rf "$TEMP_DOCX_DIR"
+
+echo "Conversión completada. Registro guardado en $LOG_FILE."#!/bin/bash
+
 # Ruta al directorio que contiene los archivos .rtf, .doc y Pdf.
 input_directory="/home/dev1/Documents/documentosAltasCortes/consejo_judicatura/"
 
