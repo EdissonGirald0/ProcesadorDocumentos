@@ -134,3 +134,4 @@ Ajusta las funciones según tus necesidades específicas.
 Si usas la opción de MongoDB, asegúrate de tener MongoDB ejecutándose localmente.
 
 Este script simplifica el procesamiento de archivos HTML limpios, permitiendo una fácil conversión y exportación de datos. ¡Disfruta de la versatilidad para adaptar tus datos a diferentes formatos y almacenarlos en MongoDB!
+

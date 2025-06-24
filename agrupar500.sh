@@ -1,5 +1,51 @@
 #!/bin/bash
 
+###############################################################################
+# Script para agrupar archivos .txt en carpetas de hasta 500 archivos cada una.
+# Autor: Edisson Giraldo
+# Fecha: 24/06/24
+# Descripción:
+#   Este script mueve archivos .txt desde una carpeta de origen a subcarpetas
+#   en una carpeta de destino, agrupando hasta 500 archivos por subcarpeta.
+###############################################################################
+
+# Ruta de la carpeta que contiene los archivos de origen
+ORIGEN="/home/dev1/Documents/documentosAltasCortes/corte_constitucional/sentencias/"
+
+# Ruta de la carpeta donde se almacenarán las carpetas agrupadas
+DESTINO="/home/dev1/Documents/documentosAltasCortes/corte_constitucional/sentencias_text/"
+
+# Crear la carpeta de destino si no existe
+mkdir -p "$DESTINO"
+
+# Inicializar contadores
+num_grupo=1
+num_archivo=0
+
+# Definir la ruta de la primera subcarpeta de destino
+GRUPO_ACTUAL="$DESTINO/grupo_$num_grupo"
+mkdir -p "$GRUPO_ACTUAL"
+
+# Iterar sobre todos los archivos .txt en la carpeta de origen
+for archivo in "$ORIGEN"/*.txt; do
+    # Si no hay archivos .txt, salir del bucle
+    [ -e "$archivo" ] || break
+
+    # Mover el archivo al grupo actual
+    mv "$archivo" "$GRUPO_ACTUAL"
+    num_archivo=$((num_archivo + 1))
+
+    # Si se alcanzan 500 archivos, crear un nuevo grupo
+    if [ $num_archivo -eq 500 ]; then
+        num_grupo=$((num_grupo + 1))
+        num_archivo=0
+        GRUPO_ACTUAL="$DESTINO/grupo_$num_grupo"
+        mkdir -p "$GRUPO_ACTUAL"
+    fi
+done
+
+echo "Proceso completado: Archivos agrupados en carpetas de hasta 500."#!/bin/bash
+
 # Ruta de la carpeta que contiene los archivos
 ruta_carpeta_origen="/home/dev1/Documents/documentosAltasCortes/corte_constitucional/sentencias/"
 
